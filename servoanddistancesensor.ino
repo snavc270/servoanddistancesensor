@@ -7,7 +7,8 @@
 const int trigPin= 6; 
 const int echoPin= 7; 
  
-Servo myservo;  
+Servo rightServo;
+Servo leftServo;   
 int pos = 0;
 
 int x; 
@@ -15,7 +16,8 @@ int x;
 void setup() {
   Serial.begin(9600); 
   
-  myservo.attach(13); 
+  rightServo.attach(9); 
+  leftServo.attach(8); 
 }
 
 void loop() {
@@ -48,11 +50,12 @@ void loop() {
 
 
 
-  if(inches<=10){
+  if(inches<=15){
     x=1*inches;  
     sweep(1);
-  }else if (inches>10){
-    myservo.write(pos); 
+  }else if (inches>15){
+    leftServo.write(pos);
+    rightServo.write(pos);  
   }
 }
 
@@ -72,17 +75,30 @@ void loop() {
     } 
 
  void sweep(int cycle){
-      for(int j=0; j<cycle; j++){
-        for(pos = 0; pos<45; pos +=1){
-          myservo.write(pos); 
-          delay(x);
-        }
-        for(pos=45; pos>=0; pos -=1){
-          myservo.write(pos); 
-          delay(x); 
+//      for(int j=0; j<cycle; j++){
+//        for(pos = 0; pos<45; pos +=1){
+//          myservo.write(pos); 
+//          delay(x);
+//        }
+//        for(pos=45; pos>=0; pos -=1){
+//          myservo.write(pos); 
+//          delay(x); 
+//          
+//        }
+        for(pos = 60; pos <= 120; pos += 1){                                 
+            leftServo.write(pos);               
+            delay(x*.75);     
+        
+            rightServo.write(120-pos);
+            delay(x*.75); 
+          } 
           
-        }
-      }
+        for(pos = 120; pos>=60; pos-=1){                                
+          leftServo.write(pos);              
+          delay(x*.5); 
       
-    }
+          rightServo.write(120-pos); 
+          delay(x*.5); 
+        } 
+     }
 
