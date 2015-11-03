@@ -50,10 +50,10 @@ void loop() {
 
 
 
-  if(inches<=15){
+  if(inches<=10){
     x=1*inches;  
     sweep(1);
-  }else if (inches>15){
+  }else if (inches>10){
     leftServo.write(pos);
     rightServo.write(pos);  
   }
@@ -85,20 +85,20 @@ void loop() {
 //          delay(x); 
 //          
 //        }
-        for(pos = 60; pos <= 120; pos += 1){                                 
+        for(pos = 60; pos <= 100; pos += 1){                                 
             leftServo.write(pos);               
-            delay(x*.75);     
+            delay(x*.6);     
         
-            rightServo.write(120-pos);
-            delay(x*.75); 
+            rightServo.write(100-pos);
+            delay(x*.25); 
           } 
           
-        for(pos = 120; pos>=60; pos-=1){                                
+        for(pos = 100; pos>=60; pos-=1){                                
           leftServo.write(pos);              
-          delay(x*.5); 
+          delay(x*.6); 
       
-          rightServo.write(120-pos); 
-          delay(x*.5); 
+          rightServo.write(100-pos); 
+          delay(x*.25); 
         } 
      }
 
